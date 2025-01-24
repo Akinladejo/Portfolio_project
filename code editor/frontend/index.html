@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Online Code Editor</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/monaco-editor/min/vs/loader.js"></script>
+</head>
+<body>
+  <header>Online Code Editor</header>
+  <div class="container">
+    <div class="editor-section">
+      <div class="controls">
+        <select id="language">
+          <option value="javascript">JavaScript</option>
+          <option value="python">Python</option>
+          <option value="java">Java</option>
+        </select>
+        <button id="run">Run Code</button>
+        <button id="save">Save Snippet</button>
+      </div>
+      <div id="editor"></div>
+    </div>
+    <div class="console-section">
+      <h3>Console Output</h3>
+      <pre id="output">Results will appear here...</pre>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
