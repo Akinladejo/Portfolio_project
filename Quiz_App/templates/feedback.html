@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block content %}
+<h1>Feedback</h1>
+<form method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="mb-3">
+        <label for="message" class="form-label">Your Feedback</label>
+        <textarea class="form-control" id="message" name="message" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

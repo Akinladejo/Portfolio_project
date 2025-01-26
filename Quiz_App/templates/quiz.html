@@ -1,0 +1,61 @@
+{% extends "base.html" %} {% block content %}
+<h1>Quiz</h1>
+<p>Time remaining: <span id="timer">60</span> seconds</p>
+<form id="quiz-form" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+    {% for q in questions %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ q.question }}</h5>
+            {% for option in q.options %}
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="{{ q.question }}" value="{{ option }}" required />
+                <label class="form-check-label">{{ option }}</label>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<nav aria-label="Quiz navigation">
+    <ul class="pagination">
+        {% if page > 1 %}
+        <li class="page-item"><a class="page-link" href="{{ url_for('quiz', page=page-1) }}">Previous</a></li>
+        {% else %}
+        <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        {% endif %} {% if page < total_pages %}
+        <li class="page-item"><a class="page-link" href="{{ url_for('quiz', page=page+1) }}">Next</a></li>
+        {% else %}
+        <li class="page-item disabled"><span class="page-link">Next</span></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<script>
+    // Timer functionality
+    let timeLeft = sessionStorage.getItem("timeLeft") || 180;
+    const timerElement = document.getElementById("timer");
+    const quizForm = document.getElementById("quiz-form");
+
+    const timer = setInterval(() => {
+        timeLeft--;
+        timerElement.textContent = timeLeft;
+        sessionStorage.setItem("timeLeft", timeLeft);
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            sessionStorage.removeItem("timeLeft");
+            alert("Time's up! Submitting your quiz...");
+            quizForm.submit();
+        }
+    }, 1000);
+
+    // Clear the timer when the form is submitted
+    quizForm.addEventListener("submit", () => {
+        sessionStorage.removeItem("timeLeft");
+    });
+</script>
+{% endblock %}

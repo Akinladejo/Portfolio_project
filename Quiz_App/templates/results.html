@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Quiz Results</h1>
+<div class="alert alert-success" role="alert">
+    Your score: <strong>{{ score }}</strong> out of {{ total }}!
+</div>
+
+<h2>Your Answers</h2>
+<ul>
+    {% for q in quiz_questions %}
+    <li>
+        <strong>{{ q.question }}</strong>:
+        {% if user_answers.get(q.question) == q.answer %}
+            <span style="color: green;">{{ user_answers.get(q.question) }} (Correct)</span>
+        {% else %}
+            <span style="color: red;">{{ user_answers.get(q.question) }} (Incorrect)</span>
+            <span style="color: green;">Correct Answer: {{ q.answer }}</span>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="/quiz" class="btn btn-primary" id="retake-quiz">Retake Quiz</a>
+<a href="/leaderboard" class="btn btn-secondary">View Leaderboard</a>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Welcome to the Quiz App!</h1>
+<p>Test your knowledge with our interactive quiz.</p>
+{% if current_user.is_authenticated %}
+    <a href="/quiz" class="btn btn-primary">Start Quiz</a>
+{% else %}
+    <p>Please <a href="/login">login</a> or <a href="/register">register</a> to take the quiz.</p>
+{% endif %}
+{% endblock %}
