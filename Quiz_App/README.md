@@ -169,7 +169,7 @@ We welcome contributions from the developer community! To contribute to the Quiz
 
 ## **Contact**
 For questions, feedback, or collaboration opportunities, please contact:
-- **Your Name**: Akinladejo Andrew
+- **Name**: Akinladejo Andrew
 - **GitHub**: Akinladejo](https://github.com/Akinladejo)
 
 ---
